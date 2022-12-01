@@ -23,6 +23,13 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ConsoleApp\ConsoleApp.csproj" />
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="TestData\Day1_Data.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
