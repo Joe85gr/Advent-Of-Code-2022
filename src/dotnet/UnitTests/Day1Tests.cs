@@ -5,11 +5,11 @@ namespace UnitTests;
 public class Day1Tests
 {
     private readonly string _data;
-    
+
     public Day1Tests()
     {
         const string testDataFilePath = @"./TestData/Day1_Data.txt";
-        _data =  File.ReadAllText(testDataFilePath);
+        _data = File.ReadAllText(testDataFilePath);
     }
 
     [Fact]
@@ -17,14 +17,14 @@ public class Day1Tests
     {
         // Arrange
         const int expectedResult = 24000;
-        
+
         // Act
         var result = Day1.GetsMaxCalories(_data);
-        
+
         // Assess
         Assert.Equal(expectedResult, result);
     }
-    
+
     [Fact]
     public void GetsSumOfTopThree()
     {
@@ -33,7 +33,7 @@ public class Day1Tests
 
         // Act
         var result = Day1.GetsSumOfTopThree(_data);
-        
+
         // Assess
         Assert.Equal(expectedResult, result);
     }

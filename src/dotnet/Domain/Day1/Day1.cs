@@ -20,7 +20,7 @@ public class Day1
         var calories = data.Split("\n\n");
         var sumOfTopThree = calories
             .Select(num => num.Split("\n").Select(n => Convert.ToInt32(n)).Sum()
-            ).OrderDescending()
+            ).OrderByDescending(n => n)
             .Take(3)
             .Sum();
 
