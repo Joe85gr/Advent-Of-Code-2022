@@ -1,44 +1,24 @@
 namespace Domain.Day4;
 
-public class Day4
+public static class Day4
 {
-    public static int GetTotallyOverlappedOnly(string data)
+    public static int CountIfTotallyOverlapped(ElfPair pair)
     {
-        var pairs = data.Split('\n');
-        var result = 0;
+        var firstElfCleanedSecondElfSections =
+            pair.FirstElf.From >= pair.SecondElf.From && pair.FirstElf.To <= pair.SecondElf.To;
+        
+        var secondElfCleanedFirstElfSections =
+            pair.SecondElf.From >= pair.FirstElf.From && pair.SecondElf.To <= pair.FirstElf.To;
 
-        foreach (var pair in pairs)
-        {
-            var elves = pair.Split(',');
-            var elf1 = elves[0].Split('-').Select(n => Convert.ToInt32(n)).ToArray();
-            var elf2 = elves[1].Split('-').Select(n => Convert.ToInt32(n)).ToArray();
-
-            var firstElfCleanedSecondElfSections = elf1[0] >= elf2[0] && elf1[1] <= elf2[1];
-            var secondElfCleanedFirstElfSections = elf2[0] >= elf1[0] && elf2[1] <= elf1[1];
-            if (firstElfCleanedSecondElfSections || secondElfCleanedFirstElfSections) result++;
-        }
-
-        return result;
+        return firstElfCleanedSecondElfSections || secondElfCleanedFirstElfSections ? 1 : 0;
     }
-    
-    public static int GetAllOverlapped(string data)
+
+    public static int CountIfOverlapped(ElfPair pair)
     {
-        var pairs = data.Split('\n');
-        var result = 0;
+        var elf1Clean = GetRange(pair.FirstElf.From, pair.FirstElf.To);
+        var elf2Clean = GetRange(pair.SecondElf.From, pair.SecondElf.To);
 
-        foreach (var pair in pairs)
-        {
-            var elves = pair.Split(',');
-            var elf1 = elves[0].Split('-').Select(int.Parse).ToArray();
-            var elf2 = elves[1].Split('-').Select(int.Parse).ToArray();
-
-            var elf1Clean = GetRange(elf1[0], elf1[1]);
-            var elf2Clean = GetRange(elf2[0], elf2[1]);
-
-            if (elf1Clean.Intersect(elf2Clean).Any()) result++;
-        }
-
-        return result;
+        return elf1Clean.Intersect(elf2Clean).Any() ? 1 : 0;
     }
     
     private static IEnumerable<int> GetRange(int first, int second)

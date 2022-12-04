@@ -21,8 +21,9 @@ var day3Part2Result = Day3.GetTotalGroupsPriority(File.ReadAllText("./Data/Day3_
 Console.WriteLine($"Day 3 Part 1 Solution: {day3Part1Result}");
 Console.WriteLine($"Day 3 Part 2 Solution: {day3Part2Result}");
 
-var day4Part1Result = Day4.GetTotallyOverlappedOnly(File.ReadAllText("./Data/Day4_Data.txt"));
-var day4Part2Result = Day4.GetAllOverlapped(File.ReadAllText("./Data/Day4_Data.txt"));
+var elvesPairs = new Elves(File.ReadAllText("./Data/Day4_Data.txt")).Pairs.ToArray();
+var day4Part1Result = elvesPairs.Select(Day4.CountIfTotallyOverlapped).Sum();
+var day4Part2Result = elvesPairs.Select(Day4.CountIfOverlapped).Sum();
 
 Console.WriteLine($"Day 4 Part 1 Solution: {day4Part1Result}");
 Console.WriteLine($"Day 4 Part 2 Solution: {day4Part2Result}");
