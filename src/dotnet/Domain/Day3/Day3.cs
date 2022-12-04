@@ -26,7 +26,9 @@ public class Day3
 
             var badge = elf1.Intersect(elf2).Intersect(elf3).First();
 
-            result += char.IsLower(badge) ? badge - 96 : badge - 38;
+            result += char.IsLower(badge) 
+                ? badge - 96 
+                : badge - 38;
         }
 
         return result;

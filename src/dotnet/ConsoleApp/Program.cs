@@ -1,6 +1,7 @@
 ﻿using Domain.Day1;
 using Domain.Day2;
 using Domain.Day3;
+using Domain.Day4;
 
 var day1Part1Result = Day1.GetsMaxCalories(File.ReadAllText("./Data/Day1_Data.txt"));
 var day1Part2Result = Day1.GetsSumOfTopThree(File.ReadAllText("./Data/Day1_Data.txt"));
@@ -19,3 +20,9 @@ var day3Part2Result = Day3.GetTotalGroupsPriority(File.ReadAllText("./Data/Day3_
 
 Console.WriteLine($"Day 3 Part 1 Solution: {day3Part1Result}");
 Console.WriteLine($"Day 3 Part 2 Solution: {day3Part2Result}");
+
+var day4Part1Result = Day4.GetTotallyOverlappedOnly(File.ReadAllText("./Data/Day4_Data.txt"));
+var day4Part2Result = Day4.GetAllOverlapped(File.ReadAllText("./Data/Day4_Data.txt"));
+
+Console.WriteLine($"Day 4 Part 1 Solution: {day4Part1Result}");
+Console.WriteLine($"Day 4 Part 2 Solution: {day4Part2Result}");
