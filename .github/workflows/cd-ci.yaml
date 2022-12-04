@@ -1,0 +1,21 @@
+name: cd-ci
+
+on:
+  push:
+
+jobs:
+  build_and_test_dotnet:
+      runs-on: ubuntu-latest
+      container:
+        image: mcr.microsoft.com/dotnet/aspnet:6.0
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Build
+          run: dotnet build ./src/dotnet
+
+        - name: Test
+          run: dotnet test ./src/dotnet
+    
