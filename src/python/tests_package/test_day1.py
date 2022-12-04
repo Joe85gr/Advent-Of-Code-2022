@@ -1,11 +1,12 @@
 import unittest
 from pathlib import Path
+
 from domain.day1.day1 import Day1
 
 
 class TestDay1(unittest.TestCase):
 
-    data = Path('test_data/Day1_data.txt').read_text()
+    data = Path('./test_data/Day1_data.txt').read_text()
 
     def test_top3_calories(self):
         # arrange
