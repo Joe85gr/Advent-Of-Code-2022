@@ -36,5 +36,5 @@ jobs:
         - name: Test
           run: |
             cd ./src/python
-            python unittest discover -v ./src/python
+            python -m unittest discover -v ./src/python
 
