@@ -1,15 +1,16 @@
 using Domain.Day1;
+using FluentAssertions;
 
 namespace UnitTests;
 
 public class Day1Tests
 {
-    private readonly string _data;
+    private readonly string[] _calories;
 
     public Day1Tests()
     {
-        const string testDataFilePath = @"./TestData/Day1_Data.txt";
-        _data = File.ReadAllText(testDataFilePath);
+        _calories = File.ReadAllText(@"./TestData/Day1_Data.txt")
+            .Split("\n\n");
     }
 
     [Fact]
@@ -19,10 +20,10 @@ public class Day1Tests
         const int expectedResult = 24000;
 
         // Act
-        var result = Day1.GetsMaxCalories(_data);
+        var result = Day1.GetsMaxCalories(_calories);
 
         // Assess
-        Assert.Equal(expectedResult, result);
+        result.Should().Be(expectedResult);
     }
 
     [Fact]
@@ -32,9 +33,9 @@ public class Day1Tests
         const int expectedResult = 45000;
 
         // Act
-        var result = Day1.GetsSumOfTopThree(_data);
+        var result = Day1.GetsSumOfTopThree(_calories);
 
         // Assess
-        Assert.Equal(expectedResult, result);
+        result.Should().Be(expectedResult);
     }
 }

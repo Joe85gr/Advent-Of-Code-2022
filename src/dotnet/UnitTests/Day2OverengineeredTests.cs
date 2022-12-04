@@ -1,13 +1,13 @@
-using Domain.Day2;
+using Domain.Day2.OverengineeredVersion;
 using FluentAssertions;
 
 namespace UnitTests;
 
-public class Day2Tests
+public class Day2OverengineeredTests
 {
     private readonly string[] _rounds;
 
-    public Day2Tests()
+    public Day2OverengineeredTests()
     {
         _rounds = File.ReadAllText(@"./TestData/Day2_Data.txt")
             .Split("\n");
@@ -20,7 +20,7 @@ public class Day2Tests
         const int expectedResult = 15;
 
         // Act
-        var result = Day2.GetAssumedTotalScore(_rounds);
+        var result = Day2Overengineered.GetTotalScore1(_rounds);
 
         // Assess
         result.Should().Be(expectedResult);    
@@ -33,7 +33,7 @@ public class Day2Tests
         const int expectedResult = 12;
 
         // Act
-        var result = Day2.GetActualTotalScore(_rounds);
+        var result = Day2Overengineered.GetTotalScore2(_rounds);
 
         // Assess
         result.Should().Be(expectedResult);

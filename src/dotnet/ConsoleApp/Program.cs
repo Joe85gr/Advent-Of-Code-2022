@@ -3,27 +3,47 @@ using Domain.Day2;
 using Domain.Day3;
 using Domain.Day4;
 
-var day1Part1Result = Day1.GetsMaxCalories(File.ReadAllText("./Data/Day1_Data.txt"));
-var day1Part2Result = Day1.GetsSumOfTopThree(File.ReadAllText("./Data/Day1_Data.txt"));
+var validDay = false;
+var selectedDay = 0;
+const int currentMaxDay = 4;
 
-Console.WriteLine($"Day 1 Part 1 Solution: {day1Part1Result}");
-Console.WriteLine($"Day 1 Part 2 Solution: {day1Part2Result}");
+while (validDay == false)
+{
+    Console.WriteLine($"Select Day between 1 and {currentMaxDay}: ");
+    validDay = int.TryParse(Console.ReadLine(), out selectedDay) && selectedDay is > 0 and <= currentMaxDay;
+    if (validDay == false) Console.WriteLine($"Meh, {selectedDay} this isn't a valid day..");
+}
 
-var day2Part1Result = Day2.GetTotalScore1(File.ReadAllText("./Data/Day2_Data.txt"));
-var day2Part2Result = Day2.GetTotalScore2(File.ReadAllText("./Data/Day2_Data.txt"));
+var part1Result = 0;
+var part2Result = 0;
 
-Console.WriteLine($"Day 2 Part 1 Solution: {day2Part1Result}");
-Console.WriteLine($"Day 2 Part 2 Solution: {day2Part2Result}");
+var rawData = File.ReadAllText($"./Data/Day{selectedDay}_Data.txt");
 
-var day3Part1Result = Day3.GetTotalRucksacksPriority(File.ReadAllText("./Data/Day3_Data.txt"));
-var day3Part2Result = Day3.GetTotalGroupsPriority(File.ReadAllText("./Data/Day3_Data.txt"));
+switch (selectedDay)
+{
+    case 1:
+        var calories = rawData.Split("\n\n");
+        part1Result = Day1.GetsMaxCalories(calories);
+        part2Result = Day1.GetsSumOfTopThree(calories);
+        break;
+    case 2:
+        var rounds = rawData.Split("\n");
+        part1Result = Day2.GetAssumedTotalScore(rounds);
+        part2Result = Day2.GetActualTotalScore(rounds);
+        break;
+    case 3:
+        var rucksacks = rawData.Split("\n");
+        part1Result = Day3.GetTotalRucksacksPriority(rucksacks);
+        part2Result = Day3.GetTotalGroupsPriority(rucksacks);
+        break;
+    case 4:
+        var elvesPairs = new Elves(rawData).Pairs.ToArray();
+        part1Result = elvesPairs.Select(Day4.CountIfTotallyOverlapped).Sum();
+        part2Result = elvesPairs.Select(Day4.CountIfOverlapped).Sum();
+        break;
+}
 
-Console.WriteLine($"Day 3 Part 1 Solution: {day3Part1Result}");
-Console.WriteLine($"Day 3 Part 2 Solution: {day3Part2Result}");
+if (part1Result == 0 || part2Result == 0) throw new Exception("Something went wrong. Results cannot be 0.");
 
-var elvesPairs = new Elves(File.ReadAllText("./Data/Day4_Data.txt")).Pairs.ToArray();
-var day4Part1Result = elvesPairs.Select(Day4.CountIfTotallyOverlapped).Sum();
-var day4Part2Result = elvesPairs.Select(Day4.CountIfOverlapped).Sum();
-
-Console.WriteLine($"Day 4 Part 1 Solution: {day4Part1Result}");
-Console.WriteLine($"Day 4 Part 2 Solution: {day4Part2Result}");
+Console.WriteLine($"Day {selectedDay} Part 1 Solution: {part1Result}");
+Console.WriteLine($"Day {selectedDay} Part 2 Solution: {part2Result}");

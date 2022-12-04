@@ -2,17 +2,15 @@ namespace Domain.Day2;
 
 public static class Day2
 {
-    public static int GetTotalScore1(string data)
+    public static int GetAssumedTotalScore(IEnumerable<string> rounds)
     {
-        var rounds = data.Split("\n");
         var totalScore1 = rounds.Select(GetMyPoints1).Sum();
 
         return totalScore1;
     }
 
-    public static int GetTotalScore2(string data)
+    public static int GetActualTotalScore(IEnumerable<string> rounds)
     {
-        var rounds = data.Split("\n");
         var totalScore1 = rounds.Select(GetMyPoints2).Sum();
 
         return totalScore1;

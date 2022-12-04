@@ -1,17 +1,18 @@
 using Domain.Day2;
 using Domain.Day3;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 namespace UnitTests;
 
 public class Day3Tests
 {
-    private readonly string _data;
+    private readonly string[] _rucksacks;
 
     public Day3Tests()
     {
-        const string testDataFilePath = @"./TestData/Day3_Data.txt";
-        _data = File.ReadAllText(testDataFilePath);
+        var data = File.ReadAllText(@"./TestData/Day3_Data.txt");
+        _rucksacks = data.Split("\n");
     }
 
     [Fact]
@@ -21,10 +22,10 @@ public class Day3Tests
         const int expectedResult = 157;
 
         // Act
-        var result = Day3.GetTotalRucksacksPriority(_data);
+        var result = Day3.GetTotalRucksacksPriority(_rucksacks);
 
         // Assess
-        Assert.Equal(expectedResult, result);
+        result.Should().Be(expectedResult);
     }
 
     [Fact]
@@ -34,9 +35,9 @@ public class Day3Tests
         const int expectedResult = 70;
 
         // Act
-        var result = Day3.GetTotalGroupsPriority(_data);
+        var result = Day3.GetTotalGroupsPriority(_rucksacks);
 
         // Assess
-        Assert.Equal(expectedResult, result);
+        result.Should().Be(expectedResult);
     }
 }

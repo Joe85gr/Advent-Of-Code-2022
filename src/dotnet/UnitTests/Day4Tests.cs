@@ -1,4 +1,5 @@
 using Domain.Day4;
+using FluentAssertions;
 
 namespace UnitTests;
 
@@ -8,8 +9,7 @@ public class Day4Tests
 
     public Day4Tests()
     {
-        const string testDataFilePath = @"./TestData/Day4_Data.txt";
-        var data = File.ReadAllText(testDataFilePath);
+        var data = File.ReadAllText(@"./TestData/Day4_Data.txt");
         _elvesPairs = new Elves(data).Pairs;
     }
 
@@ -23,7 +23,7 @@ public class Day4Tests
         var result = _elvesPairs.Select(Day4.CountIfTotallyOverlapped).Sum();
         
         // Assess
-        Assert.Equal(expectedResult, result);
+        result.Should().Be(expectedResult);
     }
 
     [Fact]
@@ -36,6 +36,6 @@ public class Day4Tests
         var result = _elvesPairs.Select(Day4.CountIfOverlapped).Sum();
         
         // Assess
-        Assert.Equal(expectedResult, result);
+        result.Should().Be(expectedResult);
     }
 }

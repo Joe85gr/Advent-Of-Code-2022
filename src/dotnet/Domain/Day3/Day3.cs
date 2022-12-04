@@ -1,37 +1,24 @@
 namespace Domain.Day3;
 
-public class Day3
+public static class Day3
 {
     private const int LowerCaseOffset = 96;
     private const int UpperCaseOffset = 38;
     
-    public static int GetTotalRucksacksPriority(string data)
+    public static int GetTotalRucksacksPriority(IEnumerable<string> rucksacks)
     {
-        var rucksacks = data.Split("\n")
-            .Select(r => r.ToCharArray());
-        
-        return rucksacks.Select(GetRucksackPriority).Sum();
+        var compartments = rucksacks.Select(r => r.ToCharArray());
+        return compartments.Select(GetRucksackPriority).Sum();
     }
 
-    public static int GetTotalGroupsPriority(string data)
+    public static int GetTotalGroupsPriority(IEnumerable<string> rucksacks)
     {
-        var rucksacks = data.Split("\n");
-        var result = 0;
+        var totalGroupPriority = rucksacks
+            .Chunk(3)
+            .Select(GetGroupPriority)
+            .Sum();
 
-        for (var i = 0; i < rucksacks.Length; i+=3)
-        {
-            var elf1 = rucksacks[i];
-            var elf2 = rucksacks[i + 1];
-            var elf3 = rucksacks[i + 2];
-
-            var badge = elf1.Intersect(elf2).Intersect(elf3).First();
-
-            result += char.IsLower(badge) 
-                ? badge - 96 
-                : badge - 38;
-        }
-
-        return result;
+        return totalGroupPriority;
     }
 
     private static int GetRucksackPriority(char[] compartments)
@@ -41,5 +28,18 @@ public class Day3
         var commonLetter = firstCompartment.Intersect(secondCompartment).First();
         
         return char.IsLower(commonLetter) ? commonLetter - LowerCaseOffset : commonLetter - UpperCaseOffset;
+    }
+
+    private static int GetGroupPriority(string[] group)
+    {
+        var elf1 = group[0];
+        var elf2 = group[1];
+        var elf3 = group[2];
+
+        var badge = elf1.Intersect(elf2).Intersect(elf3).First();
+
+        return char.IsLower(badge) 
+            ? badge - 96 
+            : badge - 38;
     }
 }

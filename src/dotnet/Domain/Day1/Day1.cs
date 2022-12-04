@@ -2,9 +2,8 @@
 
 public class Day1
 {
-    public static int GetsMaxCalories(string data)
+    public static int GetsMaxCalories(IEnumerable<string> calories)
     {
-        var calories = data.Split("\n\n");
         var maxCalories = calories
             .Select(num => num
                 .Split("\n")
@@ -15,9 +14,8 @@ public class Day1
         return maxCalories;
     }
 
-    public static int GetsSumOfTopThree(string data)
+    public static int GetsSumOfTopThree(IEnumerable<string> calories)
     {
-        var calories = data.Split("\n\n");
         var sumOfTopThree = calories
             .Select(num => num.Split("\n").Select(n => Convert.ToInt32(n)).Sum()
             ).OrderByDescending(n => n)
