@@ -1,3 +1,4 @@
+using Domain;
 using Domain.Day5;
 using FluentAssertions;
 
@@ -19,7 +20,7 @@ public class Day5Tests
         const string expectedResult = "CMZ";
         
         // Act
-        var result = Day5.Part1(_data);
+        var result = Day5.RearrangeCrates(_data, ChallengePart.One);
 
         // Assess
         result.Should().Be(expectedResult);
@@ -32,7 +33,7 @@ public class Day5Tests
         const string expectedResult = "MCD";
     
         // Act
-        var result = Day5.Part2(_data);
+        var result = Day5.RearrangeCrates(_data, ChallengePart.Two);
     
         // Assess
         result.Should().Be(expectedResult);

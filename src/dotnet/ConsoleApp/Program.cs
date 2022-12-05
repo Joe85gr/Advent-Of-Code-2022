@@ -1,4 +1,5 @@
-﻿using Domain.Day1;
+﻿using Domain;
+using Domain.Day1;
 using Domain.Day2;
 using Domain.Day3;
 using Domain.Day4;
@@ -48,8 +49,8 @@ switch (selectedDay)
         break;
     case 5:
         var data = rawData.Split("\n\n");
-        part1Result = Day5.Part1(data);
-        part2Result = Day5.Part2(data);
+        part1Result = Day5.RearrangeCrates(data, ChallengePart.One);
+        part2Result = Day5.RearrangeCrates(data, ChallengePart.Two);
         break;
 }
 
