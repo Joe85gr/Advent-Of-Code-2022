@@ -10,8 +10,8 @@ public static class Day5
 
         var newStackIsReversed = challengePart switch
         {
-            ChallengePart.One => true,
-            ChallengePart.Two => false,
+            ChallengePart.One => false,
+            ChallengePart.Two => true,
             _ => throw new ArgumentOutOfRangeException(nameof(challengePart), challengePart, null)
         };
         
