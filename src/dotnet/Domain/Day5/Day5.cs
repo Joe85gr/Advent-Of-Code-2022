@@ -17,19 +17,18 @@ public static class Day5
         
         RearrangeCratesMatrix(rearrangements, cratesMatrix, newStackIsReversed);
 
-        return cratesMatrix
-            .Aggregate("", (result, crate) => result + crate.Value.Last());
+        return new string(cratesMatrix.Select(c => c.Value.Pop()).ToArray());
     }
 
-    private static Dictionary<int, List<string>> SetBaseMatrix(IReadOnlyList<string> rawCrates)
+    private static Dictionary<int, Stack<char>> SetBaseMatrix(IReadOnlyList<string> rawCrates)
     {
         var totalColumns = int.Parse(rawCrates.Last().Trim().Split(' ').Last());
 
-        var matrix = new Dictionary<int, List<string>>();
+        var matrix = new Dictionary<int, Stack<char>>();
 
         for (var i = 0; i < totalColumns; i++)
         {
-            matrix.Add(i, new List<string>());
+            matrix.Add(i, new Stack<char>());
         }
 
         for (var i = rawCrates.Count - 2; i >= 0; i--)
@@ -39,7 +38,7 @@ public static class Day5
             for (var currentColumn = 0; currentColumn < totalColumns; currentColumn++)
             {
                 if (string.IsNullOrWhiteSpace(stack[currentColumn]) == false)
-                    matrix[currentColumn].Add(stack[currentColumn].Substring(1, 1));
+                    matrix[currentColumn].Push(char.Parse(stack[currentColumn].Substring(1, 1)));
             }
         }
 
@@ -59,23 +58,23 @@ public static class Day5
     }
 
     private static void RearrangeCratesMatrix(IEnumerable<Rearrangement> rearrangements,
-        Dictionary<int, List<string>> matrix, bool newStackIsReversed)
+        Dictionary<int, Stack<char>> matrix, bool newStackIsReversed)
     {
         foreach (var rearrangement in rearrangements)
         {
-            var newStack = new List<string>();
+            var newStack = new List<char>();
 
             for (var i = 0; i < rearrangement.Move; i++)
             {
-                newStack.Add(matrix[rearrangement.From].Last());
-                matrix[rearrangement.From].RemoveAt(matrix[rearrangement.From].Count - 1);
+                newStack.Add(matrix[rearrangement.From].Pop());
+                // matrix[rearrangement.From].Pop();
             }
 
             if(newStackIsReversed) newStack.Reverse();
             
             foreach (var crate in newStack)
             {
-                matrix[rearrangement.To].Add(crate);
+                matrix[rearrangement.To].Push(crate);
             }
         }
     }

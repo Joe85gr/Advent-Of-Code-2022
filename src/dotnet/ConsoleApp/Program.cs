@@ -4,6 +4,7 @@ using Domain.Day2;
 using Domain.Day3;
 using Domain.Day4;
 using Domain.Day5;
+using Domain.Day6;
 
 var validDay = false;
 var selectedDay = 0;
@@ -52,6 +53,10 @@ switch (selectedDay)
         part1Result = Day5.RearrangeCrates(data, ChallengePart.One);
         part2Result = Day5.RearrangeCrates(data, ChallengePart.Two);
         break;
+    case 6:
+        part1Result = Day6.FindFirstUniqueOccurrence(rawData, ChallengePart.One).ToString();
+        part2Result = Day6.FindFirstUniqueOccurrence(rawData, ChallengePart.Two).ToString();
+        break;    
 }
 
 timer.Stop();
