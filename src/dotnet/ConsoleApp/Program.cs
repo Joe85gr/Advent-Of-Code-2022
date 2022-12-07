@@ -5,10 +5,11 @@ using Domain.Day3;
 using Domain.Day4;
 using Domain.Day5;
 using Domain.Day6;
+using Domain.Day7;
 
 var validDay = false;
 var selectedDay = 0;
-const int currentMaxDay = 5;
+const int currentMaxDay = 7;
 
 while (validDay == false)
 {
@@ -22,9 +23,9 @@ var part2Result = "";
 
 var timer = new System.Diagnostics.Stopwatch();
 
-timer.Start();
-
 var rawData = File.ReadAllText($"./Data/Day{selectedDay}_Data.txt");
+
+timer.Start();
 
 switch (selectedDay)
 {
@@ -57,6 +58,11 @@ switch (selectedDay)
         part1Result = Day6.FindFirstUniqueOccurrence(rawData, ChallengePart.One).ToString();
         part2Result = Day6.FindFirstUniqueOccurrence(rawData, ChallengePart.Two).ToString();
         break;    
+    case 7:
+        var log = rawData.Split('\n');
+        part1Result = Day7.Part1(log).ToString();
+        part2Result = Day7.Part2(log).ToString();
+        break;
 }
 
 timer.Stop();
