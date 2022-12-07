@@ -5,37 +5,47 @@ public static class Day7
     public static int Part1(string[] log)
     {
         var directories = GenerateDirectoryList(log);
+        const int sizeThreshold = 100000;
 
         directories.Remove("/");
-        
-        var result = directories.Where(d => d.Value <= 100000)
-            .Sum(d => d.Value);
+
+        var result = directories
+            .Where(dir => dir.Value <= sizeThreshold)
+            .Sum(dir => dir.Value);
 
         return result;
     }
-    
+
     public static int Part2(string[] log)
     {
         var directories = GenerateDirectoryList(log);
-        
-        var totalSpace = 70000000d;
-        var minSpace = 30000000d;
-        var sizes = directories.Select(d => d.Value).OrderBy(x => x).ToArray();
+
+        const int totalSpace = 70000000;
+        const int minSpace = 30000000;
+
+        var sizes = directories
+            .Select(dir => dir.Value)
+            .OrderBy(size => size)
+            .ToArray();
 
         var usedSpace = sizes.Max();
 
         var requiredSpace = minSpace - (totalSpace - usedSpace);
-        
-        var result = sizes.Where(s => s >= requiredSpace).OrderBy(x => x).ToArray().First();
+
+        var result = sizes
+            .Where(size => size >= requiredSpace)
+            .MinBy(size => size);
 
         return result;
     }
 
     private static Dictionary<string, int> GenerateDirectoryList(IReadOnlyList<string> log)
     {
-        var currentDirPath = new List<string> {"/"};
+        const string root = "/";
+        
+        var currentDirPath = new List<string> {root};
 
-        var directories = new Dictionary<string, int>{ {currentDirPath[0], 0} };
+        var directories = new Dictionary<string, int> {{root, 0}};
 
         for (var i = 1; i < log.Count; i++)
         {
@@ -61,7 +71,7 @@ public static class Day7
                 }
             }
         }
-        
+
         return directories;
     }
 }
