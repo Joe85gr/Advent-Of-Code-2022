@@ -6,10 +6,11 @@ using Domain.Day4;
 using Domain.Day5;
 using Domain.Day6;
 using Domain.Day7;
+using Domain.Day8;
 
 var validDay = false;
 var selectedDay = 0;
-const int currentMaxDay = 7;
+const int currentMaxDay = 8;
 
 while (validDay == false)
 {
@@ -62,6 +63,13 @@ switch (selectedDay)
         var log = rawData.Split('\n');
         part1Result = Day7.Part1(log).ToString();
         part2Result = Day7.Part2(log).ToString();
+        break;
+    case 8:
+        var treeMatrix = rawData.Split('\n')
+            .Select(line => line.Select(digit => int.Parse(digit.ToString())).ToArray())
+            .ToArray();
+        part1Result = Day8.GetVisibleTrees(treeMatrix).ToString();
+        part2Result = Day8.GetMaxScenicScore(treeMatrix).ToString();
         break;
 }
 
