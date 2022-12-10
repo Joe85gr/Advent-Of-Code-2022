@@ -101,7 +101,12 @@ public class Day9Tests
     {
         var difference = head - tail;
 
-        if (Math.Abs(difference.X) > 1 && difference.Y == 0) tail.X += Math.Sign(difference.X);
+        if (Math.Abs(difference.X) > 1 && Math.Abs(difference.Y) > 1)
+        {
+            tail.X+= Math.Sign(difference.X);
+            tail.Y+= Math.Sign(difference.Y);
+        }
+        else if (Math.Abs(difference.X) > 1 && difference.Y == 0) tail.X += Math.Sign(difference.X);
         else if (Math.Abs(difference.Y ) > 1 && difference.X == 0) tail.Y+= Math.Sign(difference.Y);
         else if (Math.Abs(difference.Y) > 1 && Math.Abs(difference.X) > 0)
         {
@@ -117,3 +122,4 @@ public class Day9Tests
         return tail;
     }
 }
+
