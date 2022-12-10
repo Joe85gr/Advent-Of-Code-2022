@@ -7,10 +7,11 @@ using Domain.Day5;
 using Domain.Day6;
 using Domain.Day7;
 using Domain.Day8;
+using Domain.Day9;
 
 var validDay = false;
 var selectedDay = 0;
-const int currentMaxDay = 8;
+const int currentMaxDay = 9;
 
 while (validDay == false)
 {
@@ -70,6 +71,11 @@ switch (selectedDay)
             .ToArray();
         part1Result = Day8.GetVisibleTrees(treeMatrix).ToString();
         part2Result = Day8.GetMaxScenicScore(treeMatrix).ToString();
+        break;
+    case 9:
+        var motions = rawData.Split('\n').Select(l => l.Split(' ')).ToArray();
+        part1Result = Day9.RopeBridge(motions, 2).ToString();
+        part2Result = Day9.RopeBridge(motions, 10).ToString();
         break;
 }
 

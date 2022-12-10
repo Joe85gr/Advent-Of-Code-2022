@@ -6,8 +6,7 @@ namespace UnitTests;
 public class Day10Tests
 {
     private readonly string[][] _data;
-
-
+    
     public Day10Tests(ITestOutputHelper testOutputHelper)
     {
         _data = File.ReadAllLines(@"./TestData/Day10_Data.txt")
