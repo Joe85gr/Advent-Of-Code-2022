@@ -1,5 +1,7 @@
-﻿using Domain;
+﻿using System.Globalization;
+using Domain;
 using Domain.Day1;
+using Domain.Day11;
 using Domain.Day2;
 using Domain.Day3;
 using Domain.Day4;
@@ -76,6 +78,14 @@ switch (selectedDay)
         var motions = rawData.Split('\n').Select(l => l.Split(' ')).ToArray();
         part1Result = Day9.RopeBridge(motions, 2).ToString();
         part2Result = Day9.RopeBridge(motions, 10).ToString();
+        break;
+    case 11:
+        var monkeys = File.ReadAllText(@"./TestData/Day11_Data.txt")
+            .Split("\n\n").Select(m => new Monkey(m)).ToArray();
+        // calculated using https://www.calculatorsoup.com/calculators/math/lcm.php with the Test values
+        const int leastCommonMultiple = 9699690;
+        part1Result = Day11.Part1(monkeys, ChallengePart.One).ToString(CultureInfo.InvariantCulture);
+        part2Result = Day11.Part1(monkeys, ChallengePart.Two, leastCommonMultiple).ToString(CultureInfo.InvariantCulture);
         break;
 }
 
